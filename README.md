@@ -1,1 +1,1 @@
-# k3s-raspberrypi4b8g
+# k3s running in Raspberry Pi 4b 8G
