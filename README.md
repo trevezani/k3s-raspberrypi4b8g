@@ -66,7 +66,7 @@ mvn docker:build -f api-zipcode/api-zipcode-infraestructure
 ```
 * running:
 ```
-docker run -it --rm --name api -p 1401:1401 api-zipcode:0.0.1-SNAPSHOT
+docker run -it --rm --name api -p 1401:1401 api-zipcode:1.0.0
 ```
 * testing
 ```
