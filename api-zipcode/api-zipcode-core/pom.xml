@@ -6,7 +6,7 @@
 	<parent>
 		<groupId>br.com.trevezani.tutorial.api.zipcode</groupId>
 		<artifactId>api-zipcode</artifactId>
-		<version>0.0.1-SNAPSHOT</version>
+		<version>1.0.0</version>
 	</parent>
 	
 	<groupId>br.com.trevezani.tutorial.api.zipcode.core</groupId>
