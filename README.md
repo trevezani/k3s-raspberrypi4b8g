@@ -72,6 +72,9 @@ docker run -it --rm --name api -p 1401:1401 api-zipcode:1.0.0
 ```
 curl http://<raspberry server>:1401/zipcode/37188
 ```
+
+## Deploying in kubernetes
+
 * pushing the image to the registry
 ```
 mvn -Ddocker.registry=localhost:5000 -Ddocker.username=admin -Ddocker.password=admin \
@@ -83,3 +86,8 @@ mvn docker:remove -f api-zipcode/api-zipcode-infraestructure
 ```
 curl -u admin:admin http://<raspberry server>:5000/v2/api-zipcode/tags/list
 ```
+* defining the user and password to interact with the Registry
+```
+kubectl create secret docker-registry service-registry --docker-server=<raspberry server>:5000 \
+        --docker-username=admin --docker-password=admin
+```        
