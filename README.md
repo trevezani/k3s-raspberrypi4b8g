@@ -114,3 +114,7 @@ configs:
 ```
 kubectl apply -f api-zipcode/kubernetes/deploy.yaml
 ```
+* testing
+```
+curl http://<raspberry server>/zipcode/37188
+```
