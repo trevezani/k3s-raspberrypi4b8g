@@ -21,8 +21,6 @@ spec:
         ports:
         - containerPort: 1401
           protocol: TCP
-      imagePullSecrets:
-        - name: service-registry          
 ---
 apiVersion: v1
 kind: Service
