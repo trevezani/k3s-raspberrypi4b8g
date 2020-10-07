@@ -112,7 +112,7 @@ configs:
 ```
 * deploying the service
 ```
-kubectl apply -f api-zipcode/kubernetes/deploy.yaml
+kubectl apply -f kubernetes/deploy.yaml
 ```
 * testing
 ```
