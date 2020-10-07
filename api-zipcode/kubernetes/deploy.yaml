@@ -1,0 +1,52 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: zipcode
+  name: zipcode
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: zipcode
+  template:
+    metadata:
+      labels:
+        app: zipcode
+    spec:
+      containers:
+      - image: 192.168.1.5:5000/api-zipcode:1.0.0
+        name: zipcode
+        ports:
+        - containerPort: 1401
+          protocol: TCP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: zipcode
+spec:
+  ports:
+  - port: 1401
+    protocol: TCP
+    targetPort: 1401
+  selector:
+    app: zipcode
+  sessionAffinity: None
+  type: ClusterIP
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: zipcode
+  annotations:
+    ingress.kubernetes.io/ssl-redirect: "false"
+spec:
+  rules:
+  - http:
+      paths:
+      - path: /
+        backend:
+          serviceName: zipcode
+          servicePort: 1401
