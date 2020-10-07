@@ -86,8 +86,31 @@ mvn docker:remove -f api-zipcode/api-zipcode-infraestructure
 ```
 curl -u admin:admin http://<raspberry server>:5000/v2/api-zipcode/tags/list
 ```
-* defining the user and password to interact with the Registry
+* configuring the linux host
 ```
-kubectl create secret docker-registry service-registry --docker-server=<raspberry server>:5000 \
-        --docker-username=admin --docker-password=admin
-```        
+sudo nano /etc/hosts
+```
+in the end of file add the lines below
+```
+127.0.0.1       registry.localhost
+```
+* adding the registry configuration on k3s
+```
+sudo vim /etc/rancher/k3s/registries.yaml
+````
+Add the lines below
+```
+mirrors:
+  "registry.localhost:5000":
+    endpoint:
+      - "http://registry.localhost:5000"
+configs:
+  "registry.localhost:5000":
+    auth:
+      username: admin # this is the registry username
+      password: admin # this is the registry password
+```
+* deploying the service
+```
+kubectl apply -f api-zipcode/kubernetes/deploy.yaml
+```

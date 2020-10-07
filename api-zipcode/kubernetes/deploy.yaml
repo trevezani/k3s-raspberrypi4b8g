@@ -16,7 +16,7 @@ spec:
         app: zipcode
     spec:
       containers:
-      - image: 192.168.1.5:5000/api-zipcode:1.0.0
+      - image: registry.localhost:5000/api-zipcode:1.0.0
         name: zipcode
         ports:
         - containerPort: 1401
