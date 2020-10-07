@@ -70,5 +70,16 @@ docker run -it --rm --name api -p 1401:1401 api-zipcode:1.0.0
 ```
 * testing
 ```
-curl http://<url>:1401/zipcode/37188
+curl http://<raspberry server>:1401/zipcode/37188
+```
+* pushing the image to the registry
+```
+mvn -Ddocker.registry=localhost:5000 -Ddocker.username=admin -Ddocker.password=admin \
+    docker:push -f api-zipcode/api-zipcode-infraestructure
+
+mvn docker:remove -f api-zipcode/api-zipcode-infraestructure    
+```    
+* listing the tags inside the registry
+```
+curl -u admin:admin http://<raspberry server>:5000/v2/api-zipcode/tags/list
 ```
