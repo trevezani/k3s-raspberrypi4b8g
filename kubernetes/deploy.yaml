@@ -1,3 +1,7 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: cs
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -5,6 +9,7 @@ metadata:
   labels:
     app: zipcode
   name: zipcode
+  namespace: cs
 spec:
   replicas: 1
   selector:
@@ -26,6 +31,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: zipcode
+  namespace: cs
 spec:
   ports:
   - port: 1401
@@ -36,17 +42,19 @@ spec:
   sessionAffinity: None
   type: ClusterIP
 ---
-apiVersion: extensions/v1beta1
+apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
 metadata:
-  name: zipcode
+  name: zipcode-ingress
   annotations:
-    ingress.kubernetes.io/ssl-redirect: "false"
+    kubernetes.io/ingress.class: "traefik"
+    traefik.frontend.rule.type: PathPrefixStrip
+  namespace: cs
 spec:
   rules:
   - http:
       paths:
-      - path: /
+      - path: /cs
         backend:
           serviceName: zipcode
-          servicePort: 1401
+          servicePort: 1401          
